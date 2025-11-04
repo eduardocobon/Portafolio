@@ -1,0 +1,26 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void fizzBuzz() {
+    cout << "--- EJERCICIO FIZZBUZZ (1 a 100) ---" << endl;
+    for (int i = 1; i <= 100; ++i) {
+        // 1. Condicion mas restrictiva: Multiplo de 3 Y 5 (usando el operador %)
+        if (i % 3 == 0 && i % 5 == 0) {
+            cout << "fizzbuzz" << endl;
+        }
+        // 2. Condicion: Multiplo de 3
+        else if (i % 3 == 0) {
+            cout << "fizz" << endl;
+        }
+        // 3. Condicion: Multiplo de 5
+        else if (i % 5 == 0) {
+            cout << "buzz" << endl;
+        }
+        // 4. Ninguna de las anteriores
+        else {
+            cout << i << endl;
+        }
+    }
+}
