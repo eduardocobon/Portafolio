@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include <algorithm> // Para usar tolower
+
+using namespace std;
+
+/**
+ * Funcion que verifica si dos palabras son anagramas.
+ * Un anagrama debe usar TODAS las letras de la otra palabra
+ * y las palabras no deben ser exactamente iguales.
+ */
+bool sonAnagramas(const string& palabra1, const string& palabra2) {
+    string p1 = palabra1;
+    string p2 = palabra2;
+
+    // a. Comprobar que no sean exactamente iguales (criterio explicito)
+    if (p1 == p2) {
+        return false;
+    }
+
+    // Preprocesamiento: Convertir a minusculas (opcional, pero buena practica)
+    // y eliminar espacios (si fuera necesario, aunque el enunciado habla de "palabras")
+    transform(p1.begin(), p1.end(), p1.begin(), ::tolower);
+    transform(p2.begin(), p2.end(), p2.begin(), ::tolower);
+
+    // b. Comprobar que tengan la misma longitud
+    if (p1.length() != p2.length()) {
+        return false;
+    }
+
+    // c. Metodo de Ordenamiento: Si son anagramas, al ordenar sus letras deben ser identicas.
+    sort(p1.begin(), p1.end());
+    sort(p2.begin(), p2.end());
+
+    return p1 == p2;
+}
