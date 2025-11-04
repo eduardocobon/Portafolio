@@ -1,0 +1,29 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+void decimalABinario() {
+    int decimal;
+    cout << "--- DECIMAL A BINARIO ---" << endl;
+    cout << "Ingrese un numero entero decimal positivo: ";
+    cin >> decimal;
+
+    if (decimal == 0) {
+        cout << "Binario: 0" << endl;
+        return;
+    }
+
+    int n = decimal;
+    long long binario = 0;
+    int posicion = 1;
+
+    while (n > 0) {
+        int resto = n % 2;
+        binario += resto * posicion;
+        n /= 2;
+        posicion *= 10;
+    }
+
+    cout << "El numero decimal " << decimal << " en binario es: " << binario << endl;
+}
