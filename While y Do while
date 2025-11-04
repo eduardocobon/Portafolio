@@ -1,0 +1,41 @@
+#include <iostream>
+
+using namespace std;
+
+void convertirDias_While() {
+    int total_dias;
+    cout << " conversion " << endl;
+    cout << "Ingrese el numero total de dias: ";
+    cin >> total_dias;
+
+    int dias_restantes = total_dias;
+    int anos = 0;
+    int meses = 0;
+    int semanas = 0;
+
+    // Calculo de Anos (365 dias)
+    while (dias_restantes >= 365) {
+        anos++;
+        dias_restantes -= 365;
+    }
+
+    // Calculo de Meses (30 dias)
+    while (dias_restantes >= 30) {
+        meses++;
+        dias_restantes -= 30;
+    }
+
+    // Calculo de Semanas (7 dias)
+    while (dias_restantes >= 7) {
+        semanas++;
+        dias_restantes -= 7;
+    }
+
+    // Los dias_restantes son los dias sobrantes
+
+    cout << "\nEl numero de dias (" << total_dias << ") equivale a:" << endl;
+    cout << "Anos: " << anos << endl;
+    cout << "Meses: " << meses << endl;
+    cout << "Semanas: " << semanas << endl;
+    cout << "Dias: " << dias_restantes << endl;
+}
