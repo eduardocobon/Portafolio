@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portafolio - Eduardo</title>
+<!-- Enlace a la fuente Poppins -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Estilos del Portafolio de Eduardo
+  Fondo estético con efecto de nebulosa y glassmorphism
+*/
+
+/* ===== FONDO ELEGANTE Y BASE ===== */
+body {
+  margin: 0;
+  padding: 0;
+  /* Usando la fuente importada */
+  font-family: 'Poppins', sans-serif; 
+  color: white;
+  background: #000;
+  overflow-x: hidden;
+  background-attachment: fixed;
+  position: relative;
+  line-height: 1.6;
+}
+
+/* Capa de ruido/estrellas estáticas */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Usamos un fondo de ruido para un efecto granulado sutil */
+  background: url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: -3;
+}
+
+/* Nebulosa parallax (Fondo dinámico) */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Gradientes radiales para simular la nebulosa */
+  background: radial-gradient(circle at 30% 20%, rgba(120,60,255,0.45), transparent 60%),
+              radial-gradient(circle at 70% 80%, rgba(0,200,255,0.35), transparent 60%),
+              radial-gradient(circle at 20% 90%, rgba(255,50,150,0.35), transparent 70%);
+  filter: blur(80px);
+  transform: translateY(-5%);
+  z-index: -2;
+  animation: parallaxMove 12s ease-in-out infinite alternate;
+}
+
+@keyframes parallaxMove {
+  from { transform: translateY(-5%); }
+  to { transform: translateY(5%); }
+}
+
+/* Estrellas con efecto de brillo (Twinkle) */
+.twinkle-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  pointer-events: none;
+  z-index: -1;
+  box-shadow: 
+    100px 200px #ffffff44, 300px 500px #ffffff33, 600px 120px #ffffff55,
+    800px 400px #ffffff22, 1200px 300px #ffffff44, 500px 800px #ffffff33,
+    900px 900px #ffffff22;
+  animation: twinkle 6s infinite alternate ease-in-out;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.2; }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.3; }
+}
+
+/* ===== NAVBAR ===== */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Glassmorphism en el nav */
+  backdrop-filter: blur(15px);
+  background: rgba(0,0,0,0.4);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+nav h2 {
+    margin: 0;
+}
+nav a {
+  margin-left: 20px;
+  color: #cbd5e1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+nav a:hover {
+  color: #60a5fa;
+}
+
+/* ===== HEADER HERO ===== */
+header {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+header h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem); /* Ajuste responsive */
+  margin-bottom: 10px;
+  /* Texto con gradiente */
+  background: linear-gradient(to right, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+header p {
+  max-width: 600px;
+  opacity: 0.85;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+/* ===== SECCIONES ===== */
+section {
+  padding: 90px 25px;
+  max-width: 1000px;
+  margin: auto;
+}
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.3rem);
+  margin-bottom: 25px;
+  /* Títulos de sección con gradiente */
+  background: linear-gradient(to right, #93c5fd, #c4b5fd);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ===== TARJETAS GLASS (Glassmorphism) ===== */
+.card {
+  backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  transition: 0.35s;
+  box-shadow: 0px 5px 20px rgba(0,0,0,0.35);
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0px 10px 40px rgba(0,0,0,0.55);
+  border-color: rgba(255,255,255,0.35);
+}
+
+/* ===== GRID PROYECTOS ===== */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+/* ===== BOTONES ANIMADOS (Efecto brillo) ===== */
+.btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 120%;
+  height: 100%;
+  background: rgba(255,255,255,0.25);
+  transform: skewX(-20deg);
+  transition: 0.4s;
+  z-index: -1;
+}
+.btn:hover::before { 
+    left: 100%; 
+}
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(99,102,241,0.7);
+}
+
+/* ===== CONTACTO ===== */
+.contact-box {
+  padding: 25px;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.06);
+  border-radius: 15px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.contact-box strong {
+    color: #60a5fa;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center;
+  padding: 40px;
+  opacity: 0.75;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+/* ===== SÍMBOLOS FLOTANTES (Corregidos) ===== */
+.float-symbol {
+  position: fixed;
+  z-index: -1; /* Mover detrás del contenido */
+  font-size: 2.5rem;
+  color: #ffffff22;
+  pointer-events: none;
+  opacity: 0.15;
+  transition: opacity 0.5s;
+}
+
+/* Definición de posiciones y animaciones individuales */
+.symbol-1 { top: 15%; left: 10%; font-size: 3rem; animation: float 14s infinite ease-in-out; }
+.symbol-2 { top: 60%; left: 80%; font-size: 2rem; animation: float 18s infinite linear; }
+.symbol-3 { top: 40%; left: 50%; font-size: 3.5rem; animation: float 16s infinite ease-in-out reverse; }
+.symbol-4 { top: 75%; left: 25%; font-size: 2.5rem; animation: float 20s infinite linear reverse; }
+.symbol-5 { top: 30%; left: 90%; font-size: 1.5rem; animation: float 12s infinite ease-in-out; }
+
+/* Animación de flotación corregida */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
+  50% { transform: translateY(-40px) rotate(20deg); opacity: 0.3; }
+  100% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        padding: 15px 20px;
+    }
+    nav div {
+        margin-top: 10px;
+    }
+    nav a {
+        margin: 0 8px;
+        font-size: 0.9rem;
+    }
+    header h1 {
+        font-size: 2.8rem;
+    }
+    section {
+        padding: 60px 15px;
+    }
+}
+</style>
+</head> 
+
+<body> 
+
+<!-- Capa extra para las estrellas que brillan -->
+<div class="twinkle-layer"></div>
+
+<nav> 
+  <h2>Eduardo</h2> 
+  <div> 
+    <a href="#sobre">Sobre mí</a> 
+    <a href="#proyectos">Proyectos</a> 
+    <a href="#servicios">Servicios</a> 
+    <a href="#contacto">Contacto</a> 
+  </div> 
+</nav> 
+
+<header> 
+  <h1>Hola, soy Eduardo</h1> 
+  <p>Desarrollador web y electricista. Creo soluciones modernas, rápidas y funcionales.</p> 
+  <a href="#proyectos" class="btn">Ver Proyectos</a>
+</header> 
+
+<section id="sobre"> 
+  <h2>Sobre mí</h2> 
+
+  <p>Soy desarrollador web con enfoque en diseños modernos, 
+rápidos y funcionales, utilizando tecnologías como HTML, CSS, JavaScript y frameworks actuales. 
+Me apasiona transformar ideas complejas en interfaces de usuario intuitivas y eficientes.</p>
+  <p>Además, tengo experiencia técnica en <strong>electricidad, automatización</strong> y proyectos residenciales. Esta doble faceta me permite abordar problemas tanto digitales como físicos, creando soluciones simples, elegantes y efectivas que van desde un sitio web hasta una instalación eléctrica optimizada.</p>
+</section> 
+
+<section id="proyectos"> 
+  <h2>Proyectos Destacados</h2> 
+
+  <div class="projects"> 
+
+    <div class="card"> 
+      <h3>Anagrama Detector</h3> 
+      <p>Algoritmo en JavaScript que detecta eficientemente si dos palabras o frases son anagramas, optimizado para rendimiento.</p> 
+
+      <a class="btn" 
+href="https://github.com/eduardocobon/Portafolio/blob/main/Anagrama" 
+target="_blank">Ver Código</a> 
+    </div> 
+
+    <div class="card"> 
+      <h3>FizzBuzz Game Logic</h3> 
+      <p>Implementación del problema clásico FizzBuzz, utilizado para practicar lógica condicional y bucles, fundamental para entrevistas técnicas.</p> 
+
+      <a class="btn" 
+href="https://github.com/eduardocobon/Portafolio/blob/main/fizzbuzz" 
+target="_blank">Ver Código</a> 
+    </div> 
+
+    <div class="card"> 
+      <h3>Decimal a Binario Converter</h3> 
+      <p>Script que convierte cualquier número decimal a su representación binaria, mostrando el proceso paso a paso con manejo de enteros y fracciones.</p> 
+
+      <a class="btn" 
+href="https://github.com/eduardocobon/Portafolio/blob/main/Decimal%20a%20binario"
+target="_blank">Ver Código</a> 
+    </div> 
+
+    <div class="card"> 
+      <h3>MCD & MCM Calculator</h3> 
+      <p>Herramienta que calcula el Máximo Común Divisor (MCD) y el Mínimo Común Múltiplo (MCM) utilizando el algoritmo de Euclides.</p> 
+
+      <a class="btn" 
+href="https://github.com/eduardocobon/Portafolio/blob/main/MCD%20y%20MCM"
+target="_blank">Ver Código</a> 
+    </div> 
+
+  </div> 
+</section> 
+
+<section id="servicios"> 
+  <h2>Servicios</h2> 
+  <div class="card"> 
+    <h3>Desarrollo Web Full-Stack</h3> 
+    <p>Creación de sitios web y aplicaciones completas (front-end y back-end), modernos, rápidos y optimizados para cualquier dispositivo y SEO.</p> 
+  </div> 
+  <div class="card"> 
+    <h3>Mantenimiento y Optimización</h3> 
+    <p>Mejora de rendimiento (velocidad de carga), refactorización de código, diseño (UX/UI) y adición de funcionalidades a sitios existentes.</p> 
+  </div> 
+  <div class="card"> 
+    <h3>Consultoría Eléctrica y Automatización</h3> 
+    <p>Instalaciones, diagnóstico, mantenimiento y solución de fallas eléctricas residenciales y comerciales, incluyendo sistemas de automatización básica.</p> 
+  </div> 
+</section> 
+
+<section id="contacto"> 
+  <h2>Contáctame</h2> 
+  <div class="contact-box"> 
+    <p>Estoy disponible para nuevos proyectos y colaboraciones.</p>
+    <p>Email principal: <strong>eduardo@example.com</strong></p> 
+    <p>Conéctate por LinkedIn (¡Próximamente!) o escríbeme directamente para discutir tu idea.</p>
+  </div> 
+</section> 
+
+<footer> 
+  © 2025 Eduardo – Desarrollador Web & Técnico Eléctrico 
+</footer> 
+
+<!-- Símbolos flotantes corregidos y posicionados con clases --> 
+<div class="float-symbol symbol-1">{ }</div> 
+<div class="float-symbol symbol-2">< ></div> 
+<div class="float-symbol symbol-3">()</div> 
+<div class="float-symbol symbol-4">;</div> 
+<div class="float-symbol symbol-5">/</div> 
+
+</body> 
+</html>
